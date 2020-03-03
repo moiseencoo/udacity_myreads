@@ -187,7 +187,9 @@ button:active {
 /* book cover */
 
 .book-cover {
+  position: relative;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  /* box-shadow: 5px 5px 20px #333; */
   background: #eee;
 }
 
@@ -195,4 +197,36 @@ button:active {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+.book-cover-title:after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: -1px;
+  width: 1px;
+}
+
+.book-cover:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10px;
+  bottom: 0;
+  width: 3px;
+  background: rgba(0,0,0,0.06);
+  box-shadow: 1px 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.book-cover:before {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  left: -1px;
+  background-color: rgba(239, 239, 239, 0.3);
+  box-shadow: inset 0px 0px 5px #aaa;
+  -moz-transform: rotateY(20deg);
+  -webkit-transform: perspective(100) rotateY(20deg);
 }

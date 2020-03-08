@@ -7,15 +7,30 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .books-grid li {
+  position: relative;
   padding: 10px 15px;
   text-align: left;
+  margin: 0 15px;
 }
 
 .book {
-  width: 140px;
+  width: 180px;
+  padding: 20px;
+}
+
+.books-grid li:after {
+  content: '';
+  width: 100%;
+  height: 90%;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 15px solid #E64442;
 }
 
 .book-title,
@@ -25,6 +40,9 @@
 
 .book-title {
   margin-top: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 20px 0 10px;
 }
 
 .book-authors {
@@ -36,6 +54,7 @@
   height: 200px;
   display: flex;
   align-items: flex-end;
+  z-index: 10;
 }
 
 .book-shelf-changer {

@@ -18,15 +18,15 @@ class BooksApp extends React.Component {
   }
 
   currentlyReading() {
-    return this.state.data.filter((el) =>  el.shelf == "currentlyReading" )
+    return this.state.data.filter((el) =>  el.shelf === "currentlyReading" )
   }
 
   wantToRead() {
-    return this.state.data.filter((el) =>  el.shelf == "wantToRead" )
+    return this.state.data.filter((el) =>  el.shelf === "wantToRead" )
   }
 
   read() {
-    return this.state.data.filter((el) =>  el.shelf == "read" )
+    return this.state.data.filter((el) =>  el.shelf === "read" )
   }
 
 

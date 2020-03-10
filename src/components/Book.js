@@ -1,40 +1,42 @@
 import React from 'react';
+import ShelfChanger from './ShelfChanger'
+import * as BooksAPI from '../BooksAPI'
+
 import './Book.css';
 
-class Book extends React.Component {
-  render() {
-    return (
-      <div className="book">
-        <div className="book-top">
-          <div
-            className="book-cover"
-            style={{
-              width: 128,
-              height: 193,
-              backgroundImage: `url(${this.props.imageLink})`
-            }}
-          ></div>
-          <div className="book-shelf-changer">
-            <select>
-              <option value="move" disabled>
-                Move to...
-              </option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
-            </select>
-          </div>
-        </div>
-        <div className="book-title">{this.props.title}</div>
-        <div className="book-authors">
-          {
-            this.props.authors.join(', ')
-          }
-        </div>
-      </div>
-    );
+function Book(props){
+  
+  const {id, imageLink, title, authors, shelf} = props;
+
+  const changeShelf = (shelf) => {
+    BooksAPI.update(id, shelf).then((defs) => {
+      console.log(defs);
+    });
   }
+
+  return (
+    <div className="book">
+      <div className="book-top">
+        <div
+          className="book-cover"
+          style={{
+            width: 128,
+            height: 193,
+            backgroundImage: `url(${imageLink})`
+          }}
+        ></div>
+
+      <ShelfChanger shelf={shelf} changeShelf={changeShelf} />
+
+      </div>
+      <div className="book-title">{title}</div>
+      <div className="book-authors">
+        {
+          authors.join(', ')
+        }
+      </div>
+    </div>
+  );
 }
 
 export default Book;

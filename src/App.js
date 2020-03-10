@@ -1,34 +1,24 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+
 import './App.css'
-import Shelf from './components/Shelf'
+
+import BookList from './components/BookList'
+import SearchBooks from './components/SearchBooks'
 
 class BooksApp extends React.Component {
   state = {
-    data: [],
-    showSearchPage: false
+    books: [],
   }
 
   getData(){
-     BooksAPI.getAll().then((defs) => {
+     BooksAPI.getAll().then((data) => {
        this.setState({
-         data: defs
+         books: data
        });
      });
   }
-
-  currentlyReading() {
-    return this.state.data.filter((el) =>  el.shelf === "currentlyReading" )
-  }
-
-  wantToRead() {
-    return this.state.data.filter((el) =>  el.shelf === "wantToRead" )
-  }
-
-  read() {
-    return this.state.data.filter((el) =>  el.shelf === "read" )
-  }
-
 
   componentDidMount(){
     this.getData();
@@ -37,45 +27,13 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <button
-                className="close-search"
-                onClick={() => this.setState({ showSearchPage: false })}
-              >
-                Close
-              </button>
-              <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" />
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <Shelf
-                  shelfTitle="Currently Reading"
-                  books={this.currentlyReading()}
-                />
-                <Shelf shelfTitle="Want to Read" books={this.wantToRead()} />
-                <Shelf shelfTitle="Read" books={this.read()} />
-              </div>
-            </div>
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>
-                Add a book
-              </button>
-            </div>
-          </div>
-        )}
+        <Route exact path="/" render={() => (
+          <BookList books={this.state.books} />
+        )}/>
+
+        <Route path="/search" render={() => (
+          <SearchBooks />
+        )} />
       </div>
     );
   }

@@ -14,14 +14,20 @@ class BooksApp extends React.Component {
 
   getData() {
     BooksAPI.getAll().then(data => {
+      console.log(data);
       this.setState({
         books: data
       });
     });
   }
 
-  onChangeShelf() {
-    console.log("OMG");
+  onChangeShelf(bookID, shelf) {
+    BooksAPI.update(bookID, shelf).then(books => {
+      console.log(books);
+      // this.setState({
+      //   books: books
+      // });
+    });
   }
 
   componentDidMount() {

@@ -1,12 +1,11 @@
-import React from 'react';
-import ShelfChanger from './ShelfChanger'
-import * as BooksAPI from '../BooksAPI'
+import React from "react";
+import ShelfChanger from "./ShelfChanger";
+import * as BooksAPI from "../BooksAPI";
 
-import './Book.css';
+import "./Book.css";
 
-function Book(props){
-  
-  const {id, imageLink, title, authors, shelf, onChangeShelf} = props;
+function Book(props) {
+  const { id, imageLink, title, authors, shelf, onChangeShelf } = props;
 
   return (
     <div className="book">
@@ -20,15 +19,10 @@ function Book(props){
           }}
         ></div>
 
-      <ShelfChanger shelf={shelf} onChangeShelf={onChangeShelf} />
-
+        <ShelfChanger bookID={id} shelf={shelf} onChangeShelf={onChangeShelf} />
       </div>
       <div className="book-title">{title}</div>
-      <div className="book-authors">
-        {
-          authors && authors.join(' ')
-        }
-      </div>
+      <div className="book-authors">{authors && authors.join(" ")}</div>
     </div>
   );
 }

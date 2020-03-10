@@ -43,6 +43,36 @@ body, .app {
   padding: 0 10px 20px;
 }
 
+.btn-add {
+  position: relative;
+  padding: 10px 30px 15px;
+  border-radius: 30px;
+  font-size: 18px;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  background: #00F7FF;
+}
+
+.btn-add:before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 95%;
+  height: 95%;
+  border-radius: 30px;
+  border: 4px solid #000;
+  transition: all 0.3s ease-in;
+}
+
+.btn-add:hover:before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 @media (min-width: 600px) {
   .bookshelf {
     padding: 0 20px 40px;

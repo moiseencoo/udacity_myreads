@@ -1,10 +1,10 @@
 import React from "react";
 import Shelf from "./Shelf";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 class BookList extends React.Component {
   render() {
-    const { books } = this.props;
+    const { books, onChangeShelf } = this.props;
 
     const shelves = [
       {
@@ -31,7 +31,13 @@ class BookList extends React.Component {
               let filtered_books = books.filter(
                 book => book.shelf === shelf.slug
               );
-              return <Shelf shelfTitle={shelf.name} books={filtered_books} />;
+              return (
+                <Shelf
+                  shelfTitle={shelf.name}
+                  books={filtered_books}
+                  onChangeShelf={onChangeShelf}
+                />
+              );
             })}
           </div>
         </div>

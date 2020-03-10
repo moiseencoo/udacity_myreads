@@ -6,13 +6,7 @@ import './Book.css';
 
 function Book(props){
   
-  const {id, imageLink, title, authors, shelf} = props;
-
-  const changeShelf = (shelf) => {
-    BooksAPI.update(id, shelf).then((defs) => {
-      console.log(defs);
-    });
-  }
+  const {id, imageLink, title, authors, shelf, onChangeShelf} = props;
 
   return (
     <div className="book">
@@ -26,13 +20,13 @@ function Book(props){
           }}
         ></div>
 
-      <ShelfChanger shelf={shelf} changeShelf={changeShelf} />
+      <ShelfChanger shelf={shelf} onChangeShelf={onChangeShelf} />
 
       </div>
       <div className="book-title">{title}</div>
       <div className="book-authors">
         {
-          authors.join(', ')
+          authors && authors.join(' ')
         }
       </div>
     </div>

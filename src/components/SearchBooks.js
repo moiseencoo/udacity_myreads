@@ -22,7 +22,8 @@ class SearchBooks extends React.Component {
   }
 
   render() {
-    const { onChangeShelf, booksOnTheShelves } = this.props;
+    const { onChangeShelf, booksOnShelves } = this.props;
+    console.log(onChangeShelf)
     return (
       <div className="search-books">
         <div className="search-books-bar">

@@ -14,11 +14,7 @@ class Shelf extends React.Component {
             {books.map(book => (
               <li key={book.id}>
                 <Book
-                  id={book.id}
-                  title={book.title}
-                  imageLink={book.imageLinks.thumbnail}
-                  authors={book.authors}
-                  shelf={book.shelf}
+                  book={book}
                   onChangeShelf={onChangeShelf}
                 />
               </li>

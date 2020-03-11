@@ -12,22 +12,19 @@ class BooksApp extends React.Component {
     books: []
   };
 
-  getData() {
-    BooksAPI.getAll().then(data => {
-      console.log(data);
-      this.setState({
-        books: data
-      });
+  onChangeShelf = (bookID, shelf) => {
+    BooksAPI.update(bookID, shelf).then(() => {
+      this.getData();
     });
   }
 
-  onChangeShelf(bookID, shelf) {
-    BooksAPI.update(bookID, shelf).then(books => {
-      console.log(books);
-      // this.setState({
-      //   books: books
-      // });
-    });
+  getData = () => {
+    BooksAPI.getAll().then(data => {
+      this.setState({
+        books: data
+      });
+    })
+    .catch((err) => console.log(err));
   }
 
   componentDidMount() {

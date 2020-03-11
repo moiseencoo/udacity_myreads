@@ -1,11 +1,10 @@
 import React from "react";
 import ShelfChanger from "./ShelfChanger";
-import * as BooksAPI from "../BooksAPI";
 
 import "./Book.css";
 
 function Book(props) {
-  const { id, imageLink, title, authors, shelf, onChangeShelf } = props;
+  const { book, onChangeShelf } = props;
 
   return (
     <div className="book">
@@ -15,14 +14,14 @@ function Book(props) {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${imageLink})`
+            backgroundImage: `url(${book.imageLink})`
           }}
         ></div>
 
-        <ShelfChanger bookID={id} shelf={shelf} onChangeShelf={onChangeShelf} />
+        <ShelfChanger book={book} shelf={book.shelf} onChangeShelf={onChangeShelf} />
       </div>
-      <div className="book-title">{title}</div>
-      <div className="book-authors">{authors && authors.join(" ")}</div>
+      <div className="book-title">{book.title}</div>
+      <div className="book-authors">{book.authors && book.authors.join(" ")}</div>
     </div>
   );
 }

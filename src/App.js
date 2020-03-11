@@ -16,16 +16,17 @@ class BooksApp extends React.Component {
     BooksAPI.update(bookID, shelf).then(() => {
       this.getData();
     });
-  }
+  };
 
   getData = () => {
-    BooksAPI.getAll().then(data => {
-      this.setState({
-        books: data
-      });
-    })
-    .catch((err) => console.log(err));
-  }
+    BooksAPI.getAll()
+      .then(data => {
+        this.setState({
+          books: data
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   componentDidMount() {
     this.getData();
@@ -45,7 +46,11 @@ class BooksApp extends React.Component {
           )}
         />
 
-        <Route path="/search" render={() => <SearchBooks />} />
+        <Route
+          path="/search"
+          render={() => <SearchBooks />}
+          onChangeShelf={this.onChangeShelf}
+        />
       </div>
     );
   }

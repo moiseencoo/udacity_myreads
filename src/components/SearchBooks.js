@@ -6,24 +6,41 @@ import Book from "./Book";
 class SearchBooks extends React.Component {
   state = {
     books: [],
-    query: ""
+    query: "",
+    notFoundMessage: false
   };
 
   search(query) {
-    BooksAPI.search(query)
+    if (query !== '') {
+      BooksAPI.search(query)
       .then(books => {
         if (books.length > 0) {
+          this.setState({ notFoundMessage: false});
           this.setState({ books });
         } else {
-          this.setState({ books: [] });
+          this.clearSearchResults();
+          this.setState({ notFoundMessage: true});
         }
       })
       .catch(e => console.log(e));
+    } else {
+      this.clearSearchResults();
+    }
+  }
+
+  clearSearchResults() {
+    this.setState({ books: [] });
   }
 
   render() {
     const { onChangeShelf, booksOnShelves } = this.props;
+    let errorMessage;
     console.log(onChangeShelf)
+
+    if (this.state.notFoundMessage) {
+      errorMessage = <h2>Nothing Found</h2>;
+    }
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -39,9 +56,10 @@ class SearchBooks extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
+          {errorMessage}
           <ol className="books-grid">
             {this.state.books.map(book => (
-              <Book book={book} onChangeShelf={onChangeShelf} />
+              <Book book={book} onChangeShelf={onChangeShelf} key={book.id} />
             ))}
           </ol>
         </div>

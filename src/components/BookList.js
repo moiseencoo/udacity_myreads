@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 class BookList extends React.Component {
   render() {
     const { books, onChangeShelf } = this.props;
-    console.log(onChangeShelf);
 
     const shelves = [
       {
@@ -37,6 +36,7 @@ class BookList extends React.Component {
                   shelfTitle={shelf.name}
                   books={filtered_books}
                   onChangeShelf={onChangeShelf}
+                  key={shelf.slug}
                 />
               );
             })}

@@ -32,10 +32,18 @@ class SearchBooks extends React.Component {
     this.setState({ books: [] });
   }
 
+  allBooks() {
+    return this.state.books.map((book) => {
+      this.props.booksOnShelves.forEach(bookOnShelf => {
+        book.id === bookOnShelf.id && (book.shelf = bookOnShelf.shelf);
+      });
+      return book
+    })
+  }
+
   render() {
-    const { onChangeShelf, booksOnShelves } = this.props;
+    const { onChangeShelf } = this.props;
     let errorMessage;
-    console.log(onChangeShelf)
 
     if (this.state.notFoundMessage) {
       errorMessage = <h2>Nothing Found</h2>;
@@ -58,7 +66,7 @@ class SearchBooks extends React.Component {
         <div className="search-books-results">
           {errorMessage}
           <ol className="books-grid">
-            {this.state.books.map(book => (
+            {this.allBooks().map(book => (
               <Book book={book} onChangeShelf={onChangeShelf} key={book.id} />
             ))}
           </ol>
